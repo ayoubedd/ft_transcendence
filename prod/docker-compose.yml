@@ -1,0 +1,42 @@
+services:
+  frontend:
+    build:
+      context: ..
+      dockerfile: ./prod/Dockerfile.front
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ..
+      dockerfile: ./prod/Dockerfile.back
+    restart: unless-stopped
+    env_file:
+      - ../backend/.env
+    volumes:
+      - public_data:/upload
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    restart: always
+    env_file:
+      - ../backend/.env
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  caddy:
+    image: caddy:2.7.6-alpine
+    restart: unless-stopped
+    ports:
+      - 3000:80/tcp
+    volumes:
+      - ../caddy/Caddyfile:/etc/caddy/Caddyfile
+      - public_data:/upload
+    depends_on:
+      - frontend
+      - backend
+
+volumes:
+  db-data:
+  public_data:

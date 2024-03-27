@@ -1,0 +1,12 @@
+:80 {
+  reverse_proxy /api* backend:3000
+  reverse_proxy /ws* backend:3000
+
+  route {
+    file_server /public* {
+      root /upload
+    }
+  }
+
+  reverse_proxy /* frontend:3000
+}

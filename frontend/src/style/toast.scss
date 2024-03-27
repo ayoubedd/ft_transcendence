@@ -1,0 +1,44 @@
+.custom-toast {
+  min-width: 450px;
+  background-color: hsl(var(--background-2));
+  color: var(--color-text);
+  padding-left: 1rem;
+  border-radius: 2px 2px 2px 2px;
+  border-left: 8px solid hsl(var(--background));
+
+  &.Vue-Toastification__toast--success {
+    border-left-color: #12a54f;
+  }
+
+  &.Vue-Toastification__toast--error {
+    border-left-color: #c02d1c;
+  }
+
+  &.Vue-Toastification__toast--warning {
+    border-left-color: #d28810;
+  }
+
+  &.Vue-Toastification__toast--info {
+    border-left-color: #2078b2;
+  }
+
+  .Vue-Toastification__progress-bar {
+    background-color: rgba(101, 101, 101, 0.451)
+  }
+  .Vue-Toastification__toast-body {
+    font-size: 1rem;
+    word-break: keep-all;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+
+  .Vue-Toastification__close-button {
+    color: #fff;
+    font-size: 1.8rem;
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+  }
+}

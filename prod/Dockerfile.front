@@ -1,0 +1,22 @@
+FROM node:20.11.1-alpine3.19 AS build
+
+WORKDIR /app
+
+RUN npm install -g pnpm
+
+COPY ./frontend/package.json .
+COPY ./frontend/pnpm-lock.yaml .
+
+RUN pnpm i
+
+COPY ./frontend/ .
+
+RUN pnpm build
+
+FROM caddy:2.7.6-alpine AS prod
+
+WORKDIR /app
+COPY ./prod/Caddyfile /etc/caddy/Caddyfile
+COPY --from=build /app/dist /app
+
+CMD [ "caddy", "run", "--config", "/etc/caddy/Caddyfile" ]

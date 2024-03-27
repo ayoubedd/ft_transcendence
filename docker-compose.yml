@@ -1,0 +1,53 @@
+services:
+  frontend:
+    build:
+      dockerfile: frontend/Dockerfile
+    expose:
+      - 3000/tcp
+    volumes:
+      - ./frontend:/app
+      - node_modules:/home/pnpm
+      - /app/node_modules/
+
+  backend:
+    build:
+      dockerfile: backend/Dockerfile
+    expose:
+      - 3000/tcp
+    volumes:
+      - ./backend:/app
+      - node_modules:/home/pnpm
+      - /app/node_modules/
+      - public_data:/upload
+
+  db:
+    image: postgres
+    restart: always
+    env_file:
+      - backend/.env
+    expose:
+      - 5432/tcp
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - type: bind
+        source: ./backend/scripts
+        target: /scripts
+
+  caddy:
+    image: caddy:2.7.6
+    ports:
+      - 3000:80/tcp
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - public_data:/upload
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 3001:8080/tcp
+
+volumes:
+  db-data:
+  node_modules:
+  public_data:

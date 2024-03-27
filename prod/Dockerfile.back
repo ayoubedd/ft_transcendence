@@ -1,0 +1,16 @@
+FROM node:20.11.1-alpine3.19 AS build
+
+WORKDIR /app
+
+RUN npm install -g pnpm
+
+COPY ./backend/package.json .
+COPY ./backend/pnpm-lock.yaml .
+
+RUN pnpm i
+
+COPY ./backend/ .
+
+RUN pnpm build
+
+CMD [ "pnpm", "start:prod" ]
