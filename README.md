@@ -58,7 +58,7 @@ Since this project is fully dockerized you don't really need anything except doc
 Before building this project for production or start it in development mode, you need first to setup the environments needed for this project to function properly.
 move the `.env.example` to `.env` and fill all the environment variables with coresponding values.
 
-## Development
+### Development
 
 To run this project in development mode run the follow command.
 
@@ -68,7 +68,7 @@ docker compose up --build
 
 Now you can access your develpment environment by going to `localhost:3000`.
 
-## Building for production
+### Building for production
 
 To build this project for production, cd into `prod` directory and run the following command.
 
