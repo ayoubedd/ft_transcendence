@@ -5,8 +5,9 @@
 - [Screenshots](#screenshots)
 - [Technologies](#technologies)
 - [Requirements](#requirements)
-- [Build](#build)
-- [Usage](#usage)
+- [Setup](#setup)
+    - [Development](#Development)
+    - [Building for production](#building-for-production)
 - [Lisence](#lisence)
 
 ## Overview
